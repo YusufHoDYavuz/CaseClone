@@ -3,11 +3,12 @@
 namespace XGames.GameName
 {
     [RequireComponent(typeof(Animator))]
-    public class Character : MonoBehaviour
+    public class Character : Humanoid
     {
         [Header("Movement")]
         [SerializeField] private float moveSpeed = 1.0f;
         private float previousMousePositionX;
+        private float mouseDeltaX = 0f;
         private bool isDragging;
 
         [Header("Animator")]
@@ -36,24 +37,30 @@ namespace XGames.GameName
                 isDragging = false;
             }
 
+
             if (isDragging)
             {
-                float mouseDeltaX = Input.mousePosition.x - previousMousePositionX;
+                mouseDeltaX = Input.mousePosition.x - previousMousePositionX;
                 previousMousePositionX = Input.mousePosition.x;
 
                 Vector3 movement = new Vector3(mouseDeltaX * moveSpeed * Time.deltaTime, 0, 0);
                 transform.Translate(movement);
 
                 //Animation
-                if (Mathf.Abs(mouseDeltaX) > 0.2f)
+                if (Mathf.Abs(mouseDeltaX) > 0.1f)
                 {
                     animator.SetFloat("Horizontal", mouseDeltaX);
                 }
             }
-            else
+            else if(!isDragging && Mathf.Abs(mouseDeltaX) < 0.1f)
             {
                 animator.SetFloat("Horizontal", 0);
             }
+        }
+
+        protected override void Attack()
+        {
+            Debug.Log("Character Attack");
         }
     }
 }
