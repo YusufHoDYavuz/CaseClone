@@ -955,6 +955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+  moveLimit: 3
 --- !u!95 &7875494479349421464
 Animator:
   serializedVersion: 5
