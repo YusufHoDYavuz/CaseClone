@@ -21,7 +21,7 @@ namespace XGames.GameName
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Test")) 
+            if (other.CompareTag("Enemy")) 
             { 
                 gameObject.SetActive(false);
             }
