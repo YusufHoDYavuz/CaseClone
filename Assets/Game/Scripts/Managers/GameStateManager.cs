@@ -14,7 +14,6 @@ namespace XGames.GameName.Managers
             if (instance == null)
             {
                 instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else
             {
