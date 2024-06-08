@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   damage: 10
-  fireRate: 0.75
+  fireRate: 0.5

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using XGames.GameName.EventSystem;
 
 namespace XGames.GameName
 {
@@ -22,6 +23,12 @@ namespace XGames.GameName
         private void Update()
         {
             Movement();
+
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                int randomValue = Random.Range(0, 5);
+                EventBus<UpdateWeapon>.Emit(this, new UpdateWeapon(randomValue));
+            }
         }
 
         private void Movement()
@@ -60,7 +67,7 @@ namespace XGames.GameName
 
         protected override void Attack()
         {
-            Debug.Log("Character Attack");
+
         }
     }
 }
