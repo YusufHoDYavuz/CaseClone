@@ -3,7 +3,6 @@ using XGames.GameName.EventSystem;
 
 namespace XGames.GameName
 {
-    [RequireComponent(typeof(Animator))]
     public class Character : Humanoid
     {
         [Header("Movement")]
@@ -14,11 +13,11 @@ namespace XGames.GameName
         private bool isDragging;
 
         [Header("Animator")]
-        private Animator animator;
+        [SerializeField] private Animator animator;
 
         private void Start()
         {
-            animator = GetComponent<Animator>();
+
         }
 
         private void Update()

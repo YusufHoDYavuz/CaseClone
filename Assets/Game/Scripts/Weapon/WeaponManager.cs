@@ -36,6 +36,8 @@ namespace XGames.GameName
             StartFire();
         }
 
+        #region Weapon
+
         private void SetWeaponsMesh()
         {
             for (int i = 0; i < transform.childCount; i++)
@@ -78,10 +80,10 @@ namespace XGames.GameName
 
             return 0;
         }
+        #endregion
 
-        /// <summary>
-        /// Attack
-        /// </summary>
+        #region Fire
+
         private void StartFire()
         {
             if (fireCoroutine != null)
@@ -135,5 +137,6 @@ namespace XGames.GameName
 
             UpdateWeaponData();
         }
+        #endregion
     }
 }
