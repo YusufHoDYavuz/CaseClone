@@ -21,6 +21,11 @@ namespace XGames.GameName
         private void OnEnable()
         {
             EventBus<UpdateWeapon>.AddListener(UpdateWeapon);
+
+            SetWeaponsMesh();
+
+            UpdateWeaponData();
+            StartFire();
         }
 
         private void OnDisable()
@@ -30,10 +35,7 @@ namespace XGames.GameName
 
         void Start()
         {
-            SetWeaponsMesh();
-
-            UpdateWeaponData();
-            StartFire();
+            
         }
 
         #region Weapon

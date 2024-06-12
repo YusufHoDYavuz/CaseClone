@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using XGames.GameName.EventSystem;
 
 namespace XGames.GameName
@@ -12,9 +13,11 @@ namespace XGames.GameName
         private float mouseDeltaX = 0f;
         private bool isDragging;
 
+        private List<GameObject> formationCharacters = new();
+
         private void Start()
         {
-
+            SetCharacterCount();
         }
 
         private void Update()
@@ -25,6 +28,16 @@ namespace XGames.GameName
             {
                 int randomValue = Random.Range(0, 5);
                 EventBus<UpdateWeapon>.Emit(this, new UpdateWeapon(randomValue));
+            }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                RaiseFormationCount();
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                DecreaseFormationCount();
             }
         }
 
@@ -58,7 +71,9 @@ namespace XGames.GameName
                     if (Mathf.Abs(mouseDeltaX) > 0.5f)
                     {
                         Animator animator = transform.GetChild(i).GetComponent<Animator>();
-                        animator.SetFloat("Horizontal", mouseDeltaX);
+
+                        if (animator != null)
+                            animator.SetFloat("Horizontal", mouseDeltaX);
                     }
                 }
             }
@@ -69,10 +84,64 @@ namespace XGames.GameName
                     if (Mathf.Abs(mouseDeltaX) <= 0.5f)
                     {
                         Animator animator = transform.GetChild(i).GetComponent<Animator>();
-                        animator.SetFloat("Horizontal", 0);
+
+                        if (animator != null)
+                            animator.SetFloat("Horizontal", 0);
                     }
                 }
             }
+        }
+
+        private void SetCharacterCount()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                formationCharacters.Add(transform.GetChild(i).gameObject);
+                
+                if (i > 0)
+                    formationCharacters[i].SetActive(false);
+            }
+        }
+
+        private void RaiseFormationCount()
+        {
+            foreach (GameObject formation in formationCharacters)
+            {
+                if (!formation.activeInHierarchy)
+                {
+                    formation.SetActive(true);
+                    break;
+                }
+            }
+        }
+
+        private void DecreaseFormationCount()
+        {
+            int activeCharacterAmount = GetActiveChracterAmount();
+
+            for (int i = formationCharacters.Count - 1; i > 0; i--)
+            { 
+                if (formationCharacters[i].activeInHierarchy && activeCharacterAmount > 1)
+                {
+                    formationCharacters[i].SetActive(false);
+                    break;
+                }
+            }
+        }
+
+        private int GetActiveChracterAmount()
+        {
+            int amount = 0;
+
+            foreach(GameObject chracter in formationCharacters)
+            {
+                if (chracter.activeInHierarchy)
+                {
+                    amount++;
+                }
+            }
+
+            return amount;
         }
 
         protected override void Attack()
