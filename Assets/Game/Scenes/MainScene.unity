@@ -3198,6 +3198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   moveLimit: 3
+  formationAnimationSpeed: 0.15
 --- !u!114 &2119637362
 MonoBehaviour:
   m_ObjectHideFlags: 0

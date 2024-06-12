@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using DG.Tweening;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using XGames.GameName.EventSystem;
 
@@ -13,6 +15,8 @@ namespace XGames.GameName
         private float mouseDeltaX = 0f;
         private bool isDragging;
 
+        [Header("Formation")]
+        [SerializeField] private float formationAnimationSpeed;
         private List<GameObject> formationCharacters = new();
 
         private void Start()
@@ -92,6 +96,7 @@ namespace XGames.GameName
             }
         }
 
+        #region Character Formation
         private void SetCharacterCount()
         {
             for (int i = 0; i < transform.childCount; i++)
@@ -99,17 +104,21 @@ namespace XGames.GameName
                 formationCharacters.Add(transform.GetChild(i).gameObject);
                 
                 if (i > 0)
+                {
                     formationCharacters[i].SetActive(false);
+                    formationCharacters[i].transform.localScale = Vector3.zero;
+                }
             }
         }
 
         private void RaiseFormationCount()
         {
-            foreach (GameObject formation in formationCharacters)
+            foreach (GameObject formationCharacter in formationCharacters)
             {
-                if (!formation.activeInHierarchy)
+                if (!formationCharacter.activeInHierarchy)
                 {
-                    formation.SetActive(true);
+                    formationCharacter.SetActive(true);
+                    formationCharacter.transform.DOScale(Vector3.one, formationAnimationSpeed).SetEase(Ease.OutBack);
                     break;
                 }
             }
@@ -123,7 +132,8 @@ namespace XGames.GameName
             { 
                 if (formationCharacters[i].activeInHierarchy && activeCharacterAmount > 1)
                 {
-                    formationCharacters[i].SetActive(false);
+                    formationCharacters[i].transform.DOScale(Vector3.zero, formationAnimationSpeed).SetEase(Ease.InBack);
+                    StartCoroutine(SetActiveWithDelay(formationCharacters[i], formationAnimationSpeed));
                     break;
                 }
             }
@@ -142,6 +152,14 @@ namespace XGames.GameName
             }
 
             return amount;
+        }
+        #endregion
+
+        private IEnumerator SetActiveWithDelay(GameObject obj, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            obj.SetActive(false);
+
         }
 
         protected override void Attack()

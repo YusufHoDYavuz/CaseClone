@@ -4,6 +4,7 @@ namespace XGames.GameName
 {
     public class Formation : MonoBehaviour
     {
+        [Header("Direction")]
         [SerializeField] private float radius;
         [SerializeField] private float angle;
 
