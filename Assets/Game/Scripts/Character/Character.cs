@@ -12,9 +12,6 @@ namespace XGames.GameName
         private float mouseDeltaX = 0f;
         private bool isDragging;
 
-        [Header("Animator")]
-        [SerializeField] private Animator animator;
-
         private void Start()
         {
 
@@ -55,14 +52,26 @@ namespace XGames.GameName
                 transform.position = newPosition;
 
                 // Animation
-                if (Mathf.Abs(mouseDeltaX) > 0.1f)
+
+                for (int i = 0; i < transform.childCount; i++)
                 {
-                    animator.SetFloat("Horizontal", mouseDeltaX);
+                    if (Mathf.Abs(mouseDeltaX) > 0.5f)
+                    {
+                        Animator animator = transform.GetChild(i).GetComponent<Animator>();
+                        animator.SetFloat("Horizontal", mouseDeltaX);
+                    }
                 }
             }
-            else if (!isDragging && Mathf.Abs(mouseDeltaX) < 0.1f)
+            else if (!isDragging)
             {
-                animator.SetFloat("Horizontal", 0);
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    if (Mathf.Abs(mouseDeltaX) <= 0.5f)
+                    {
+                        Animator animator = transform.GetChild(i).GetComponent<Animator>();
+                        animator.SetFloat("Horizontal", 0);
+                    }
+                }
             }
         }
 
