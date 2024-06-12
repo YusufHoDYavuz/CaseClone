@@ -17,6 +17,7 @@ namespace XGames.GameName
 
         [Header("Formation")]
         [SerializeField] private float formationAnimationSpeed;
+        [SerializeField] private ParticleSystem raiseFormationParticle;
         private List<GameObject> formationCharacters = new();
 
         private void Start()
@@ -119,6 +120,9 @@ namespace XGames.GameName
                 {
                     formationCharacter.SetActive(true);
                     formationCharacter.transform.DOScale(Vector3.one, formationAnimationSpeed).SetEase(Ease.OutBack);
+
+                    Vector3 particlePosition = new Vector3(formationCharacter.transform.position.x, formationCharacter.transform.position.y * 2, formationCharacter.transform.position.z);
+                    Instantiate(raiseFormationParticle, particlePosition, Quaternion.identity);
                     break;
                 }
             }
