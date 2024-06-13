@@ -6,14 +6,16 @@ namespace XGames.GameName
 {
     public class Enemy : Humanoid
     {
-        void Start()
+        public override void TakeDamage(float damageAmount)
         {
-        
+            base.TakeDamage(damageAmount);
         }
 
-        void Update()
+        protected override void Die()
         {
+            base.Die();
 
+            Destroy(gameObject);
         }
 
         protected override void Attack()

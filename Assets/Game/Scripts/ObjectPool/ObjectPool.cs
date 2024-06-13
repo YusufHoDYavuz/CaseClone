@@ -13,7 +13,7 @@ namespace XGames.GameName
         [Header("Pool")]
         [Space(5)]
         [SerializeField] private GameObject bulletPrefab;
-        [Range(1,100)] [SerializeField] private int amountToPool;
+        [Range(1,250)] [SerializeField] private int amountToPool;
 
         private void Awake()
         {
