@@ -22,6 +22,7 @@ namespace XGames.GameName
 
         private void Start()
         {
+            EventBus<GetCharacter>.Emit(this, new GetCharacter(this.gameObject));
             SetCharacterCount();
         }
 
