@@ -18,14 +18,20 @@ namespace XGames.GameName
         private float damage = 1.0f;
         private Coroutine fireCoroutine;
 
+        [Header("Main Character")]
+        [SerializeField] private Character character;
+
         private void OnEnable()
         {
             EventBus<UpdateWeapon>.AddListener(UpdateWeapon);
 
-            SetWeaponsMesh();
+            if (character != null && !character.GetIsDeath())
+            {
+                SetWeaponsMesh();
 
-            UpdateWeaponData();
-            StartFire();
+                UpdateWeaponData();
+                StartFire();
+            }
         }
 
         private void OnDisable()
@@ -98,7 +104,7 @@ namespace XGames.GameName
 
         private IEnumerator FireLoop()
         {
-            while (true)
+            while (character != null && !character.GetIsDeath())
             {
                 yield return new WaitForSeconds(fireRate);
                 Fire();

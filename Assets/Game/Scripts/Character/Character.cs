@@ -104,7 +104,7 @@ namespace XGames.GameName
             for (int i = 0; i < transform.childCount; i++)
             {
                 formationCharacters.Add(transform.GetChild(i).gameObject);
-                
+
                 if (i > 0)
                 {
                     formationCharacters[i].SetActive(false);
@@ -134,7 +134,7 @@ namespace XGames.GameName
             int activeCharacterAmount = GetActiveChracterAmount();
 
             for (int i = formationCharacters.Count - 1; i > 0; i--)
-            { 
+            {
                 if (formationCharacters[i].activeInHierarchy && activeCharacterAmount > 1)
                 {
                     formationCharacters[i].transform.DOScale(Vector3.zero, formationAnimationSpeed).SetEase(Ease.InBack);
@@ -148,7 +148,7 @@ namespace XGames.GameName
         {
             int amount = 0;
 
-            foreach(GameObject chracter in formationCharacters)
+            foreach (GameObject chracter in formationCharacters)
             {
                 if (chracter.activeInHierarchy)
                 {
@@ -169,7 +169,31 @@ namespace XGames.GameName
 
         protected override void Attack()
         {
+            //
+        }
 
+        public override void TakeDamage(float damageAmount)
+        {
+            base.TakeDamage(damageAmount);
+
+            Debug.Log($"Player is taken damage. Health: {health}");
+        }
+
+        protected override void Die()
+        {
+            base.Die();
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Animator animator = transform.GetChild(i).GetComponent<Animator>();
+
+                if (animator != null)
+                {
+                    animator.SetTrigger("Death");
+                    isDeath = true;
+                }
+            }
+            Debug.Log($"Player is dead.");
         }
     }
 }
