@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 using XGames.GameName.EventSystem;
+using XGames.GameName.Managers;
 
 namespace XGames.GameName
 {
@@ -25,12 +26,12 @@ namespace XGames.GameName
 
         private void OnEnable()
         {
-            EventBus<GetCharacter>.AddListener(SetAgentValue);
+            EventBus<GetCharacterEvent>.AddListener(SetAgentValue);
         }
 
         private void OnDisable()
         {
-            EventBus<GetCharacter>.RemoveListener(SetAgentValue);
+            EventBus<GetCharacterEvent>.RemoveListener(SetAgentValue);
         }
 
         private void Awake()
@@ -38,7 +39,7 @@ namespace XGames.GameName
             agent = GetComponent<NavMeshAgent>();
         }
 
-        private void SetAgentValue(object sender, GetCharacter e)
+        private void SetAgentValue(object sender, GetCharacterEvent e)
         {
             target = e.character;
         }
@@ -55,7 +56,12 @@ namespace XGames.GameName
                     animator.SetTrigger("Idle");
             }
             else
-                ChasePlayer();
+            {
+                if (GameStateManager.Instance.GetGameState() == GameStateManager.GameState.Start)
+                {
+                    ChasePlayer();
+                }
+            }
         }
 
         public override void TakeDamage(float damageAmount)

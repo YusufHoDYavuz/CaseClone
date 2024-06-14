@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XGames.GameName.Events.States;
 using XGames.GameName.EventSystem;
 
 namespace XGames.GameName
@@ -23,25 +24,28 @@ namespace XGames.GameName
 
         private void OnEnable()
         {
-            EventBus<UpdateWeapon>.AddListener(UpdateWeapon);
-
-            if (character != null && !character.GetIsDeath())
-            {
-                SetWeaponsMesh();
-
-                UpdateWeaponData();
-                StartFire();
-            }
+            EventBus<UpdateWeaponEvent>.AddListener(UpdateWeapon);
+            EventBus<GameStartEvent>.AddListener(SetAndStartFire);
         }
 
         private void OnDisable()
         {
-            EventBus<UpdateWeapon>.RemoveListener(UpdateWeapon);
+            EventBus<UpdateWeaponEvent>.RemoveListener(UpdateWeapon);
+            EventBus<GameStartEvent>.RemoveListener(SetAndStartFire);
         }
 
-        void Start()
+        private void Start()
         {
-            
+            SetWeaponsMesh();
+        }
+
+        private void SetAndStartFire(object sender,GameStartEvent e)
+        {
+            if (character != null && !character.GetIsDeath())
+            {
+                UpdateWeaponData();
+                StartFire();
+            }
         }
 
         #region Weapon
@@ -123,7 +127,7 @@ namespace XGames.GameName
             }
         }
 
-        private void UpdateWeapon(object sender, UpdateWeapon e)
+        private void UpdateWeapon(object sender, UpdateWeaponEvent e)
         {
             ChangeWeaponAndUpdateData(e.weaponId);
             StartFire();

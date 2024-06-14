@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XGames.GameName.Events.States;
 using XGames.GameName.EventSystem;
+using XGames.GameName.Managers;
 
 namespace XGames.GameName
 {
@@ -22,7 +24,7 @@ namespace XGames.GameName
 
         private void Start()
         {
-            EventBus<GetCharacter>.Emit(this, new GetCharacter(this.gameObject));
+            EventBus<GetCharacterEvent>.Emit(this, new GetCharacterEvent(this.gameObject));
             SetCharacterCount();
         }
 
@@ -33,7 +35,7 @@ namespace XGames.GameName
             if (Input.GetKeyDown(KeyCode.Y))
             {
                 int randomValue = Random.Range(0, 5);
-                EventBus<UpdateWeapon>.Emit(this, new UpdateWeapon(randomValue));
+                EventBus<UpdateWeaponEvent>.Emit(this, new UpdateWeaponEvent(randomValue));
             }
 
             if (Input.GetKeyDown(KeyCode.T))
@@ -49,50 +51,52 @@ namespace XGames.GameName
 
         private void Movement()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (GameStateManager.Instance.GetGameState() == GameStateManager.GameState.Start)
             {
-                isDragging = true;
-                previousMousePositionX = Input.mousePosition.x;
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                isDragging = false;
-            }
-
-            if (isDragging)
-            {
-                mouseDeltaX = Input.mousePosition.x - previousMousePositionX;
-                previousMousePositionX = Input.mousePosition.x;
-
-                Vector3 newPosition = transform.position + new Vector3(mouseDeltaX * moveSpeed * Time.deltaTime, 0, 0);
-                newPosition.x = Mathf.Clamp(newPosition.x, -moveLimit, moveLimit);
-
-                transform.position = newPosition;
-
-                // Animation
-
-                for (int i = 0; i < transform.childCount; i++)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    if (Mathf.Abs(mouseDeltaX) > 0.5f)
-                    {
-                        Animator animator = transform.GetChild(i).GetComponent<Animator>();
+                    isDragging = true;
+                    previousMousePositionX = Input.mousePosition.x;
+                }
 
-                        if (animator != null)
-                            animator.SetFloat("Horizontal", mouseDeltaX);
+                if (Input.GetMouseButtonUp(0))
+                {
+                    isDragging = false;
+                }
+
+                if (isDragging)
+                {
+                    mouseDeltaX = Input.mousePosition.x - previousMousePositionX;
+                    previousMousePositionX = Input.mousePosition.x;
+
+                    Vector3 newPosition = transform.position + new Vector3(mouseDeltaX * moveSpeed * Time.deltaTime, 0, 0);
+                    newPosition.x = Mathf.Clamp(newPosition.x, -moveLimit, moveLimit);
+
+                    transform.position = newPosition;
+
+                    // Animation
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        if (Mathf.Abs(mouseDeltaX) > 0.5f)
+                        {
+                            Animator animator = transform.GetChild(i).GetComponent<Animator>();
+
+                            if (animator != null)
+                                animator.SetFloat("Horizontal", mouseDeltaX);
+                        }
                     }
                 }
-            }
-            else if (!isDragging)
-            {
-                for (int i = 0; i < transform.childCount; i++)
+                else if (!isDragging)
                 {
-                    if (Mathf.Abs(mouseDeltaX) <= 0.5f)
+                    for (int i = 0; i < transform.childCount; i++)
                     {
-                        Animator animator = transform.GetChild(i).GetComponent<Animator>();
+                        if (Mathf.Abs(mouseDeltaX) <= 0.5f)
+                        {
+                            Animator animator = transform.GetChild(i).GetComponent<Animator>();
 
-                        if (animator != null)
-                            animator.SetFloat("Horizontal", 0);
+                            if (animator != null)
+                                animator.SetFloat("Horizontal", 0);
+                        }
                     }
                 }
             }
@@ -191,6 +195,7 @@ namespace XGames.GameName
                 {
                     animator.SetTrigger("Death");
                     isDeath = true;
+                    EventBus<GameOverEvent>.Emit(this, new GameOverEvent());
                 }
             }
             Debug.Log($"Player is dead.");

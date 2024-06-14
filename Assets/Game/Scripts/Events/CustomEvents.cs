@@ -1,20 +1,20 @@
 using UnityEngine;
 
-public struct UpdateWeapon
+public struct UpdateWeaponEvent
 {
     public int weaponId;
 
-    public UpdateWeapon(int weaponId)
+    public UpdateWeaponEvent(int weaponId)
     {
         this.weaponId = weaponId;
     }
 }
 
-public struct GetCharacter
+public struct GetCharacterEvent
 {
     public GameObject character;
 
-    public GetCharacter(GameObject character)
+    public GetCharacterEvent(GameObject character)
     {
         this.character = character;
     }
