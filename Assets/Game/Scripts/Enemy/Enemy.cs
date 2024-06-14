@@ -1,8 +1,8 @@
+using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using XGames.GameName.EventSystem;
 using XGames.GameName.Managers;
 
@@ -10,8 +10,7 @@ namespace XGames.GameName
 {
     public class Enemy : Humanoid
     {
-        [Header("Nav Mesh")]
-        [SerializeField] private Animator animator;
+        [Header("Attack")]
         [SerializeField] private float attackRepeatTime;
         [SerializeField] private float maxAttackDistance;
         [SerializeField] private float damageAmount;
@@ -19,10 +18,22 @@ namespace XGames.GameName
         private bool playerInAttackRange;
         private bool alreadyAttacked;
 
+        [Header("Animator")]
+        [SerializeField] private Animator animator;
+
+        [Header("Health Bar")]
+        [SerializeField] private GameObject healthBarCanvas;
+        [SerializeField] private Image healthBarImage;
+        [SerializeField] private Image healthBarImageDelay;
+        [SerializeField] private Text healthBarText;
+
+        //Raycast for enemy
         private RaycastHit hit;
         private bool isHit;
 
+        //Other - Single
         private GameObject target;
+        private Camera mainCamera;
 
         private void OnEnable()
         {
@@ -37,6 +48,13 @@ namespace XGames.GameName
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
+            mainCamera = Camera.main;
+        }
+
+        private void Start()
+        {
+            UpdateHealthBarUI();
+            healthBarCanvas.SetActive(false);
         }
 
         private void SetAgentValue(object sender, GetCharacterEvent e)
@@ -46,6 +64,7 @@ namespace XGames.GameName
 
         private void Update()
         {
+            //Chase - Attack
             float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
             if (distanceToTarget < agent.stoppingDistance)
@@ -62,11 +81,17 @@ namespace XGames.GameName
                     ChasePlayer();
                 }
             }
+
+            //Health Bar UI Rotation
+            Vector3 direction = mainCamera.transform.position - healthBarCanvas.transform.position;
+            healthBarCanvas.transform.rotation = Quaternion.LookRotation(-direction, Vector3.up);
         }
 
         public override void TakeDamage(float damageAmount)
         {
             base.TakeDamage(damageAmount);
+
+            UpdateHealthBarUI();
         }
 
         protected override void Die()
@@ -118,6 +143,26 @@ namespace XGames.GameName
         {
             agent.SetDestination(target.transform.position);
             animator.SetBool("isChase", true);
+        }
+
+        private void UpdateHealthBarUI()
+        {
+            if (!healthBarCanvas.activeInHierarchy)
+            {
+                healthBarCanvas.SetActive(true);
+                healthBarCanvas.transform.DOScale(Vector3.zero, 0.2f).From().SetEase(Ease.OutBack);
+            }
+
+            //Health Amount Text
+            healthBarText.text = health.ToString();
+
+            //Health Image
+            float convertHealthValue = health / 100;
+            DOTween.To(() => healthBarImage.fillAmount, x => healthBarImage.fillAmount = x, convertHealthValue, 0.2f)
+               .SetEase(Ease.OutQuad);
+
+            DOTween.To(() => healthBarImageDelay.fillAmount, x => healthBarImageDelay.fillAmount = x, convertHealthValue, 1f)
+               .SetEase(Ease.OutQuad);
         }
 
         private void OnDrawGizmos()
