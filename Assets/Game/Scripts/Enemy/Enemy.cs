@@ -27,6 +27,9 @@ namespace XGames.GameName
         [SerializeField] private Image healthBarImageDelay;
         [SerializeField] private Text healthBarText;
 
+        [Header("Death")]
+        [SerializeField] private GameObject deathParticle;
+
         //Raycast for enemy
         private RaycastHit hit;
         private bool isHit;
@@ -34,6 +37,7 @@ namespace XGames.GameName
         //Other - Single
         private GameObject target;
         private Camera mainCamera;
+        private CapsuleCollider coll;
 
         private void OnEnable()
         {
@@ -48,6 +52,7 @@ namespace XGames.GameName
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
+            coll = GetComponent<CapsuleCollider>();
             mainCamera = Camera.main;
         }
 
@@ -76,7 +81,7 @@ namespace XGames.GameName
             }
             else
             {
-                if (GameStateManager.Instance.GetGameState() == GameStateManager.GameState.Start)
+                if (GameStateManager.Instance.GetGameState() == GameStateManager.GameState.Start && !GetIsDeath())
                 {
                     ChasePlayer();
                 }
@@ -98,6 +103,18 @@ namespace XGames.GameName
         {
             base.Die();
 
+            animator.SetBool("isDie", true);
+            healthBarCanvas.transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack);
+            StartCoroutine(nameof(DieDelay));
+        } 
+
+        private IEnumerator DieDelay()
+        {
+            Destroy(coll);
+            yield return new WaitForSeconds(2f);
+            Vector3 particlePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z * 0.9f);
+            Instantiate(deathParticle, particlePosition, Quaternion.identity);
+            yield return new WaitForSeconds(.2f);
             Destroy(gameObject);
         }
 

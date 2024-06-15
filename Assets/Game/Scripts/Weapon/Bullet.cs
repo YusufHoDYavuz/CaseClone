@@ -31,7 +31,7 @@ namespace XGames.GameName
 
                 Enemy enemy = other.GetComponent<Enemy>();
 
-                if (enemy != null)
+                if (enemy != null && !enemy.GetIsDeath())
                     enemy.TakeDamage(damageAmount);
             }
         }

@@ -154,6 +154,7 @@ MonoBehaviour:
   healthBarImage: {fileID: 849618098345457252}
   healthBarImageDelay: {fileID: 1992715620251873709}
   healthBarText: {fileID: 2547931593811281712}
+  deathParticle: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55, type: 3}
 --- !u!195 &2817104362201669782
 NavMeshAgent:
   m_ObjectHideFlags: 0
