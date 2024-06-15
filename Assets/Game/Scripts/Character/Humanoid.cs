@@ -12,7 +12,10 @@ namespace XGames.GameName
             health -= damageAmount;
 
             if (health <= 0)
+            {
                 Die();
+                health = 0;
+            }
         }
 
         protected virtual void Die()

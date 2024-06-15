@@ -157,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527024436288379574, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: m_Name
-      value: AI_EnemyZombie
+      value: AI_EnemyZomb
       objectReference: {fileID: 0}
     - target: {fileID: 8305079990614540813, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: animator
@@ -173,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8305079990614540813, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: initialHealth
-      value: 250
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
