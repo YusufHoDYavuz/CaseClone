@@ -4,7 +4,7 @@ namespace XGames.GameName
 {
     public class Humanoid : MonoBehaviour
     {
-        protected float health = 100f;
+        protected float health;
         protected bool isDeath;
 
         public virtual void TakeDamage(float damageAmount)

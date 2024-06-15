@@ -58,6 +58,7 @@ MonoBehaviour:
   moveLimit: 3
   formationAnimationSpeed: 0.15
   raiseFormationParticle: {fileID: 5112403345868107899, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
+  initialHealth: 100
 --- !u!114 &2365043791971696529
 MonoBehaviour:
   m_ObjectHideFlags: 0

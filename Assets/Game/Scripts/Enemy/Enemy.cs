@@ -21,7 +21,8 @@ namespace XGames.GameName
         [Header("Animator")]
         [SerializeField] private Animator animator;
 
-        [Header("Health Bar")]
+        [Header("Health & UI")]
+        [SerializeField] private float initialHealth;
         [SerializeField] private GameObject healthBarCanvas;
         [SerializeField] private Image healthBarImage;
         [SerializeField] private Image healthBarImageDelay;
@@ -58,6 +59,7 @@ namespace XGames.GameName
 
         private void Start()
         {
+            base.health = initialHealth;
             UpdateHealthBarUI();
             healthBarCanvas.SetActive(false);
         }
@@ -178,7 +180,7 @@ namespace XGames.GameName
             healthBarText.text = health.ToString();
 
             //Health Image
-            float convertHealthValue = health / 100;
+            float convertHealthValue = Mathf.InverseLerp(0, initialHealth, health);
             DOTween.To(() => healthBarImage.fillAmount, x => healthBarImage.fillAmount = x, convertHealthValue, 0.2f)
                .SetEase(Ease.OutQuad);
 

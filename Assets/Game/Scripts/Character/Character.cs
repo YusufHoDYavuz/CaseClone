@@ -22,10 +22,15 @@ namespace XGames.GameName
         [SerializeField] private ParticleSystem raiseFormationParticle;
         private List<GameObject> formationCharacters = new();
 
+        [Header("Health")]
+        [SerializeField] private float initialHealth;
+
         private void Start()
         {
             EventBus<GetCharacterEvent>.Emit(this, new GetCharacterEvent(this.gameObject));
             SetCharacterCount();
+
+            base.health = initialHealth;
         }
 
         private void Update()
