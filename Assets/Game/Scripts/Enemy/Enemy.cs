@@ -85,6 +85,10 @@ namespace XGames.GameName
                 {
                     ChasePlayer();
                 }
+                else if(GetIsDeath())
+                {
+                    agent.SetDestination(transform.position);
+                }
             }
 
             //Health Bar UI Rotation
