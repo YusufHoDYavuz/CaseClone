@@ -10,6 +10,8 @@ namespace XGames.GameName
 
         [Header("Attack")]
         [SerializeField] private float damageAmount;
+        [SerializeField] private GameObject hitParticle;
+
 
         private new Rigidbody rigidbody;
 
@@ -27,12 +29,16 @@ namespace XGames.GameName
         {
             if (other.CompareTag("Enemy"))
             {
+                Vector3 partilcePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z * 0.9f);
+                Instantiate(hitParticle, partilcePosition, Quaternion.identity);
                 gameObject.SetActive(false);
 
                 Enemy enemy = other.GetComponent<Enemy>();
 
                 if (enemy != null && !enemy.GetIsDeath())
+                {
                     enemy.TakeDamage(damageAmount);
+                }
             }
         }
     }

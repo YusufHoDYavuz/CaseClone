@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   damageAmount: 75
+  hitParticle: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
 --- !u!54 &6676530507886872561
 Rigidbody:
   m_ObjectHideFlags: 0
