@@ -30,6 +30,16 @@ namespace XGames.GameName
         [SerializeField] private Color damageEffectColor;
         [SerializeField] private float damageEffectIntensity;
 
+        private void OnEnable()
+        {
+            EventBus<UpdateCharacterFormation>.AddListener(UpdateFormationCount);
+        }
+
+        private void OnDisable()
+        {
+            EventBus<UpdateCharacterFormation>.RemoveListener(UpdateFormationCount);
+        }
+
         private void Start()
         {
             EventBus<GetCharacterEvent>.Emit(this, new GetCharacterEvent(this.gameObject));
@@ -41,16 +51,6 @@ namespace XGames.GameName
         private void Update()
         {
             Movement();
-
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                RaiseFormationCount();
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                DecreaseFormationCount();
-            }
         }
 
         private void Movement()
@@ -121,8 +121,10 @@ namespace XGames.GameName
             }
         }
 
-        private void RaiseFormationCount()
+        private void RaiseFormationCount(int raiseCount)
         {
+            int activatedCount = 0;
+
             foreach (GameObject formationCharacter in formationCharacters)
             {
                 if (!formationCharacter.activeInHierarchy)
@@ -132,13 +134,20 @@ namespace XGames.GameName
 
                     Vector3 particlePosition = new Vector3(formationCharacter.transform.position.x, formationCharacter.transform.position.y * 2, formationCharacter.transform.position.z);
                     Instantiate(raiseFormationParticle, particlePosition, Quaternion.identity);
-                    break;
+
+                    activatedCount++;
+
+                    if (activatedCount >= raiseCount)
+                    {
+                        break;
+                    }
                 }
             }
         }
 
-        private void DecreaseFormationCount()
+        private void DecreaseFormationCount(int decreaseCount)
         {
+            int activatedCount = 0;
             int activeCharacterAmount = GetActiveChracterAmount();
 
             for (int i = formationCharacters.Count - 1; i > 0; i--)
@@ -147,9 +156,23 @@ namespace XGames.GameName
                 {
                     formationCharacters[i].transform.DOScale(Vector3.zero, formationAnimationSpeed).SetEase(Ease.InBack);
                     StartCoroutine(SetActiveWithDelay(formationCharacters[i], formationAnimationSpeed));
-                    break;
+
+                    activatedCount++;
+
+                    if (activatedCount >= decreaseCount)
+                    {
+                        break;
+                    }
                 }
             }
+        }
+
+        private void UpdateFormationCount(object sender, UpdateCharacterFormation e)
+        {
+            if (e.isIncrease)
+                RaiseFormationCount(e.updateFormationCount);
+            else
+                DecreaseFormationCount(e.updateFormationCount);
         }
 
         private int GetActiveChracterAmount()

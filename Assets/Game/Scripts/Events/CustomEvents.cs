@@ -19,3 +19,15 @@ public struct GetCharacterEvent
         this.character = character;
     }
 }
+
+public struct UpdateCharacterFormation
+{
+    public bool isIncrease;
+    public int updateFormationCount;
+
+    public UpdateCharacterFormation(bool isIncrease, int updateAmount)
+    {
+        this.isIncrease = isIncrease;
+        this.updateFormationCount = updateAmount;
+    }
+}
