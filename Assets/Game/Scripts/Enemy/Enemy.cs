@@ -118,6 +118,7 @@ namespace XGames.GameName
             animator.SetBool("isDie", true);
             healthBarCanvas.transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack);
             StartCoroutine(nameof(DieDelay));
+            StopCoroutine(nameof(AttackDamageDelay));
         } 
 
         private IEnumerator DieDelay()
