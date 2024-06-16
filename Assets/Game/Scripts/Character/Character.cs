@@ -42,12 +42,6 @@ namespace XGames.GameName
         {
             Movement();
 
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                int randomValue = Random.Range(0, 5);
-                EventBus<UpdateWeaponEvent>.Emit(this, new UpdateWeaponEvent(randomValue));
-            }
-
             if (Input.GetKeyDown(KeyCode.T))
             {
                 RaiseFormationCount();

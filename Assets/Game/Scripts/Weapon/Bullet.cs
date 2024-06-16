@@ -12,7 +12,6 @@ namespace XGames.GameName
         [SerializeField] private float damageAmount;
         [SerializeField] private GameObject hitParticle;
 
-
         private new Rigidbody rigidbody;
 
         private void Awake()
@@ -27,17 +26,17 @@ namespace XGames.GameName
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Enemy"))
+            if (other.CompareTag("Target"))
             {
                 Vector3 partilcePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z * 0.9f);
                 Instantiate(hitParticle, partilcePosition, Quaternion.identity);
                 gameObject.SetActive(false);
 
-                Enemy enemy = other.GetComponent<Enemy>();
+                IDamageable damageable = other.GetComponent<IDamageable>();
 
-                if (enemy != null && !enemy.GetIsDeath())
+                if (damageable != null)
                 {
-                    enemy.TakeDamage(damageAmount);
+                    damageable.Damage(damageAmount);
                 }
             }
         }
