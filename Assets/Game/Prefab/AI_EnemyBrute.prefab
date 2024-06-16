@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1631936082459816865, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.64
+      value: -0.15658028
       objectReference: {fileID: 0}
     - target: {fileID: 1631936082459816865, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1631936082459816865, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 9.67
       objectReference: {fileID: 0}
     - target: {fileID: 1631936082459816865, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -59,6 +59,18 @@ PrefabInstance:
     - target: {fileID: 8305079990614540813, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: initialHealth
       value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305079990614540813, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
+      propertyPath: damageEffectMesh
+      value: 
+      objectReference: {fileID: 8214690919117516999}
+    - target: {fileID: 8305079990614540813, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
+      propertyPath: damageEffectColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305079990614540813, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
+      propertyPath: damageEffectIntensity
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -141,6 +153,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Brute
       objectReference: {fileID: 0}
+    - target: {fileID: 1130629136877428748, guid: 6a76d1d332c034e4bbcf83c6e08b6a06, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7386b87281645884594be77b9b20e34e, type: 2}
+    - target: {fileID: 1130629136877428748, guid: 6a76d1d332c034e4bbcf83c6e08b6a06, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7386b87281645884594be77b9b20e34e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -175,6 +195,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!137 &8214690919117516999 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1130629136877428748, guid: 6a76d1d332c034e4bbcf83c6e08b6a06, type: 3}
+  m_PrefabInstance: {fileID: 9056946571130261707}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8807358166558062368 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6a76d1d332c034e4bbcf83c6e08b6a06, type: 3}

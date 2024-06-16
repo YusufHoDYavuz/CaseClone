@@ -31,6 +31,11 @@ namespace XGames.GameName
         [Header("Death")]
         [SerializeField] private GameObject deathParticle;
 
+        [Header("Damage Effect")]
+        [SerializeField] private SkinnedMeshRenderer damageEffectMesh;
+        [SerializeField] private Color damageEffectColor;
+        [SerializeField] private float damageEffectIntensity;
+
         //Raycast for enemy
         private RaycastHit hit;
         private bool isHit;
@@ -101,6 +106,7 @@ namespace XGames.GameName
         public override void TakeDamage(float damageAmount)
         {
             base.TakeDamage(damageAmount);
+            base.DamageEffect(damageEffectMesh, damageEffectColor, damageEffectIntensity);
 
             UpdateHealthBarUI();
         }

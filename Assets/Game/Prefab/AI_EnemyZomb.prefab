@@ -107,6 +107,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8dbb82e7729f4904198a3ca2488e68c3, type: 3}
   m_PrefabInstance: {fileID: 2000791907876482258}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &8590472466579057285 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1372682465251703209, guid: 8dbb82e7729f4904198a3ca2488e68c3, type: 3}
+  m_PrefabInstance: {fileID: 2000791907876482258}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5829613573001666543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117,7 +122,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1631936082459816865, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.12
+      value: -2.5069227
       objectReference: {fileID: 0}
     - target: {fileID: 1631936082459816865, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -125,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1631936082459816865, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.13494053
+      value: 9.169495
       objectReference: {fileID: 0}
     - target: {fileID: 1631936082459816865, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -174,6 +179,18 @@ PrefabInstance:
     - target: {fileID: 8305079990614540813, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: initialHealth
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305079990614540813, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
+      propertyPath: damageEffectMesh
+      value: 
+      objectReference: {fileID: 8590472466579057285}
+    - target: {fileID: 8305079990614540813, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
+      propertyPath: damageEffectColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305079990614540813, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
+      propertyPath: damageEffectIntensity
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

@@ -59,6 +59,9 @@ MonoBehaviour:
   formationAnimationSpeed: 0.15
   raiseFormationParticle: {fileID: 5112403345868107899, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
   initialHealth: 100
+  damageEffectMesh: {fileID: 8434081571943925695}
+  damageEffectColor: {r: 1, g: 1, b: 1, a: 0}
+  damageEffectIntensity: 10
 --- !u!114 &2365043791971696529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +359,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 5345218486561060560, guid: b26adb1a905b6c44dbf484ff6dbbe85a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0d56fbb62b09dd446890f53c43daa262, type: 2}
     - target: {fileID: 5681394551879326051, guid: b26adb1a905b6c44dbf484ff6dbbe85a, type: 3}
       propertyPath: character
       value: 
@@ -408,6 +415,11 @@ PrefabInstance:
 --- !u!4 &6060944037539570452 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7726254021519938171, guid: b26adb1a905b6c44dbf484ff6dbbe85a, type: 3}
+  m_PrefabInstance: {fileID: 4550297422528541039}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8434081571943925695 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5345218486561060560, guid: b26adb1a905b6c44dbf484ff6dbbe85a, type: 3}
   m_PrefabInstance: {fileID: 4550297422528541039}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4676253635417307216

@@ -25,6 +25,11 @@ namespace XGames.GameName
         [Header("Health")]
         [SerializeField] private float initialHealth;
 
+        [Header("Damage Effect")]
+        [SerializeField] private SkinnedMeshRenderer damageEffectMesh;
+        [SerializeField] private Color damageEffectColor;
+        [SerializeField] private float damageEffectIntensity;
+
         private void Start()
         {
             EventBus<GetCharacterEvent>.Emit(this, new GetCharacterEvent(this.gameObject));
@@ -184,6 +189,7 @@ namespace XGames.GameName
         public override void TakeDamage(float damageAmount)
         {
             base.TakeDamage(damageAmount);
+            base.DamageEffect(damageEffectMesh, damageEffectColor, damageEffectIntensity);
 
             Debug.Log($"Player is taken damage. Health: {health}");
         }

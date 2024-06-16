@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 namespace XGames.GameName
@@ -20,7 +21,7 @@ namespace XGames.GameName
 
         protected virtual void Die()
         {
-            Debug.Log(gameObject.name + " has died.");
+            Debug.Log($"{gameObject.name} has died.");
         }
 
         public virtual bool GetIsDeath()
@@ -34,6 +35,15 @@ namespace XGames.GameName
         protected virtual void Attack()
         {
 
+        }
+
+        protected virtual void DamageEffect(SkinnedMeshRenderer mesh,Color targetColor, float damageEffectIntensity)
+        {
+            Color initialColor = mesh.material.color;
+
+            Sequence colorTween = DOTween.Sequence();
+            colorTween.Append(mesh.material.DOColor(targetColor * damageEffectIntensity, 0.05f));
+            colorTween.Append(mesh.material.DOColor(initialColor, 0.05f));
         }
     }
 }
