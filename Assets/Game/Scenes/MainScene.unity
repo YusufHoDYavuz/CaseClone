@@ -806,10 +806,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1492475251853946318, guid: cb189985a7789a9458cef463dd2adc2e, type: 3}
-      propertyPath: hitAmount
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4937789384945675239, guid: cb189985a7789a9458cef463dd2adc2e, type: 3}
       propertyPath: m_Name
       value: Barrel

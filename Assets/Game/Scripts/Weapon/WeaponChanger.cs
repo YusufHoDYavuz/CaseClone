@@ -1,3 +1,4 @@
+using log4net.Util;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -18,6 +19,9 @@ namespace XGames.GameName
 
         [Header("Animator")]
         [SerializeField] private Animator animator;
+
+        [Header("Particle")]
+        [SerializeField] private GameObject explosionParticle;
 
         private void OnEnable()
         {
@@ -74,6 +78,9 @@ namespace XGames.GameName
 
             if (hitAmount <= 0)
             {
+                Vector3 particlePosition = new Vector3(transform.position.x, transform.position.y * -3, transform.position.z);
+                Instantiate(explosionParticle, particlePosition, Quaternion.identity);
+
                 EventBus<UpdateWeaponEvent>.Emit(this, new UpdateWeaponEvent(weaponID));
                 Destroy(gameObject);
             }
