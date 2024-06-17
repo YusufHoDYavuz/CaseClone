@@ -13,15 +13,17 @@ namespace XGames.GameName
         [SerializeField] private List<int> multiplierAmounts;
         private int multiplierValue;
 
+        private Animator animator;
+
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
+
         void Start()
         {
             int randomValue = Random.Range(0, multiplierAmounts.Count);
             SetRandomMultiplierValue(randomValue);
-        }
-
-        void Update()
-        {
-
         }
 
         private void SetRandomMultiplierValue(int randomValue)
@@ -41,6 +43,7 @@ namespace XGames.GameName
             {
                 multiplierValue++;
                 UpdateMultiplierText();
+                animator.SetTrigger("Hit");
             }
         }
 
