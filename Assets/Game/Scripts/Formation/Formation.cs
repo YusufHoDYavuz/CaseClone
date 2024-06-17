@@ -1,17 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace XGames.GameName
 {
     public class Formation : MonoBehaviour
     {
-        [Header("Direction")]
-        [SerializeField] private float radius;
-        [SerializeField] private float angle;
-
-        void Start()
-        {
-
-        }
+        [Header("Formation")]
+        [SerializeField] private float characterSpacing;
 
         void Update()
         {
@@ -20,17 +14,22 @@ namespace XGames.GameName
 
         private void MainCharacterPlace()
         {
+            int gridSize = Mathf.CeilToInt(Mathf.Sqrt(transform.childCount));
+
             for (int i = 0; i < transform.childCount; i++)
             {
-                Vector3 childLocalPositions = GetMainCharacterLocalPositions(i);
+                Vector3 childLocalPositions = GetMainCharacterLocalPositions(i, gridSize);
                 transform.GetChild(i).localPosition = childLocalPositions;
             }
         }
 
-        private Vector3 GetMainCharacterLocalPositions(int index)
+        private Vector3 GetMainCharacterLocalPositions(int index, int gridSize)
         {
-            float x = radius * Mathf.Sqrt(index) * Mathf.Cos(Mathf.Deg2Rad * index * angle);
-            float z = radius * Mathf.Sqrt(index) * Mathf.Sin(Mathf.Deg2Rad * index * angle);
+            int column = index % gridSize;
+            int row = index / gridSize;
+
+            float x = column * characterSpacing;
+            float z = row * -characterSpacing;
 
             return new Vector3(x, 0, z);
         }

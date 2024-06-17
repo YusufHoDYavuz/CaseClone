@@ -19,8 +19,7 @@ namespace XGames.GameName
         private float damage = 1.0f;
         private Coroutine fireCoroutine;
 
-        [Header("Main Character")]
-        [SerializeField] private Character character;
+        private Character character;
 
         private void OnEnable()
         {
@@ -32,6 +31,11 @@ namespace XGames.GameName
         {
             EventBus<UpdateWeaponEvent>.RemoveListener(UpdateWeapon);
             EventBus<GameStartEvent>.RemoveListener(SetAndStartFire);
+        }
+
+        private void Awake()
+        {
+            character = GetComponentInParent<Character>();
         }
 
         private void Start()
