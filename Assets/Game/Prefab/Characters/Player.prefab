@@ -58,6 +58,7 @@ MonoBehaviour:
   moveLimit: 3
   formationAnimationSpeed: 0.15
   raiseFormationParticle: {fileID: 5112403345868107899, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
+  decreaseFormationParticle: {fileID: 4271093393614929224, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
   initialHealth: 100
   damageEffectMesh: {fileID: 8434081571943925695}
   damageEffectColor: {r: 1, g: 1, b: 1, a: 0}

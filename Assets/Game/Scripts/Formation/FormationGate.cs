@@ -15,7 +15,8 @@ namespace XGames.GameName
 
         void Start()
         {
-            SetRandomMultiplierValue();
+            int randomValue = Random.Range(0, multiplierAmounts.Count);
+            SetRandomMultiplierValue(randomValue);
         }
 
         void Update()
@@ -23,24 +24,32 @@ namespace XGames.GameName
 
         }
 
-        private void SetRandomMultiplierValue()
+        private void SetRandomMultiplierValue(int randomValue)
         {
-            int randomValue = Random.Range(0, multiplierAmounts.Count);
             multiplierValue = multiplierAmounts[randomValue];
-
-            if (isIncrease)
-                multiplierText.text = "+" + multiplierValue.ToString();
-            else
-                multiplierText.text = "-" + multiplierValue.ToString();
+            UpdateMultiplierText();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<Character>() !=null)
+            if (other.GetComponent<Character>() != null)
             {
                 EventBus<UpdateCharacterFormation>.Emit(this, new UpdateCharacterFormation(isIncrease, multiplierValue));
                 Destroy(gameObject);
             }
+            else if (other.GetComponent<Bullet>() != null)
+            {
+                multiplierValue++;
+                UpdateMultiplierText();
+            }
+        }
+
+        private void UpdateMultiplierText()
+        {
+            if (isIncrease)
+                multiplierText.text = "+" + multiplierValue.ToString();
+            else
+                multiplierText.text = "-" + multiplierValue.ToString();
         }
     }
 }

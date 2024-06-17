@@ -2800,10 +2800,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 25877457530686140, guid: ee6a50f6c6b6d8847b009a001da4bca5, type: 3}
-      propertyPath: decreaseFormationParticle
-      value: 
-      objectReference: {fileID: 4271093393614929224, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
     - target: {fileID: 3936200466021416497, guid: ee6a50f6c6b6d8847b009a001da4bca5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.02

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Formation_Gate_Increase
       objectReference: {fileID: 0}
+    - target: {fileID: 2138533298942670226, guid: 6d4940715a0d03c40beb50e318b52417, type: 3}
+      propertyPath: m_TagString
+      value: Target
+      objectReference: {fileID: 0}
     - target: {fileID: 4026389780497482861, guid: 6d4940715a0d03c40beb50e318b52417, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
