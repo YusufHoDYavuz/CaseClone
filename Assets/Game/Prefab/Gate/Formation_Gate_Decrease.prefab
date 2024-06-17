@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: isIncrease
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4026389780497482861, guid: 6d4940715a0d03c40beb50e318b52417, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 85cdd7355a5be2d4a857df460a97d564, type: 2}
+    - target: {fileID: 4957614722161868969, guid: 6d4940715a0d03c40beb50e318b52417, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 85cdd7355a5be2d4a857df460a97d564, type: 2}
     - target: {fileID: 5288080848486442743, guid: 6d4940715a0d03c40beb50e318b52417, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

@@ -39,6 +39,7 @@ namespace XGames.GameName
             if (other.GetComponent<Character>() !=null)
             {
                 EventBus<UpdateCharacterFormation>.Emit(this, new UpdateCharacterFormation(isIncrease, multiplierValue));
+                Destroy(gameObject);
             }
         }
     }

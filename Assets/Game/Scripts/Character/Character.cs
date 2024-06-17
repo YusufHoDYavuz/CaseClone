@@ -20,6 +20,7 @@ namespace XGames.GameName
         [Header("Formation")]
         [SerializeField] private float formationAnimationSpeed;
         [SerializeField] private ParticleSystem raiseFormationParticle;
+        [SerializeField] private ParticleSystem decreaseFormationParticle;
         private List<GameObject> formationCharacters = new();
 
         [Header("Health")]
@@ -157,6 +158,9 @@ namespace XGames.GameName
                     formationCharacters[i].transform.DOScale(Vector3.zero, formationAnimationSpeed).SetEase(Ease.InBack);
                     StartCoroutine(SetActiveWithDelay(formationCharacters[i], formationAnimationSpeed));
 
+                    Vector3 particlePosition = new Vector3(formationCharacters[i].transform.position.x, formationCharacters[i].transform.position.y * 2, formationCharacters[i].transform.position.z);
+                    Instantiate(decreaseFormationParticle, particlePosition, Quaternion.identity);
+
                     activatedCount++;
 
                     if (activatedCount >= decreaseCount)
@@ -227,6 +231,11 @@ namespace XGames.GameName
                 }
             }
             Debug.Log($"Player is dead.");
+        }
+
+        public void GateTransitionEffect()
+        {
+
         }
     }
 }
