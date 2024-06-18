@@ -12,13 +12,9 @@ namespace XGames.GameName.Managers
         private void Awake()
         {
             if (instance == null)
-            {
                 instance = this;
-            }
             else
-            {
                 Destroy(gameObject);
-            }
         }
 
         public void SetGameState(GameState newGameState)
@@ -31,7 +27,7 @@ namespace XGames.GameName.Managers
         {
             return currentGameState;
         }
-    
+
         public enum GameState
         {
             Prepare,

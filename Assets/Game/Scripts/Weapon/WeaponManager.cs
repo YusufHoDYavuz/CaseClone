@@ -11,7 +11,7 @@ namespace XGames.GameName
         [Header("Weapons Data")]
         [SerializeField] private List<WeaponData> weaponsData;
 
-        [Header("Weapons Mesh")]
+        [Header("Weapon Mesh")]
         [SerializeField] private List<GameObject> weaponsMesh;
         
         //Fire
@@ -20,15 +20,17 @@ namespace XGames.GameName
         private Coroutine fireCoroutine;
 
         private Character character;
-        private bool test;
 
         private void OnEnable()
         {
             EventBus<UpdateWeaponEvent>.AddListener(UpdateWeapon);
             EventBus<GameStartEvent>.AddListener(SetAndStartFire);
 
-            if (character != null)
+            if (character != null && DataHolder.Instance != null)
             {
+                ChangeWeaponAndUpdateData(DataHolder.Instance.ActiveWeaponID);
+                //Debug.Log($"ActiveWeaponID: {DataHolder.Instance.ActiveWeaponID}");
+
                 StartFire();
             }
         }
@@ -44,12 +46,15 @@ namespace XGames.GameName
             character = GetComponentInParent<Character>();
         }
 
+        private void Start()
+        {
+            SetWeaponsMesh();
+        }
+
         private void SetAndStartFire(object sender,GameStartEvent e)
         {
             if (character != null && !character.GetIsDeath())
-            {
                 StartFire();
-            }
         }
 
         #region Weapon
@@ -58,15 +63,13 @@ namespace XGames.GameName
         {
             for (int i = 0; i < transform.childCount; i++)
             {
-                weaponsMesh.Add(transform.GetChild(i).gameObject);
-
                 if (i >= 1)
                 {
-                    transform.GetChild(i).gameObject.SetActive(false);
+                    weaponsMesh[i].SetActive(false);
                 }
                 else
                 {
-                    transform.GetChild(i).gameObject.SetActive(true);
+                    weaponsMesh[i].SetActive(true);
                 }
             }
         }
@@ -102,7 +105,6 @@ namespace XGames.GameName
 
         private void StartFire()
         {
-            SetWeaponsMesh();
             UpdateWeaponData();
 
             if (fireCoroutine != null)
@@ -137,7 +139,17 @@ namespace XGames.GameName
         private void UpdateWeapon(object sender, UpdateWeaponEvent e)
         {
             ChangeWeaponAndUpdateData(e.weaponId);
+            UpdateWeaponData();
             StartFire();
+        }
+
+        private void ChangeWeaponAndUpdateData(int nextWeapon)
+        {
+            int activeWeaponId = GetActiveWeaponId();
+            DataHolder.Instance.ActiveWeaponID = nextWeapon;
+
+            weaponsMesh[activeWeaponId].SetActive(false);
+            weaponsMesh[nextWeapon].SetActive(true);
         }
 
         private void UpdateWeaponData()
@@ -146,16 +158,7 @@ namespace XGames.GameName
             fireRate = weaponsData[activeWeaponId].fireRate;
             damage = weaponsData[activeWeaponId].damage;
         }
-
-        private void ChangeWeaponAndUpdateData(int nextWeapon)
-        {
-            int activeWeaponId = GetActiveWeaponId();
-
-            weaponsMesh[activeWeaponId].SetActive(false);
-            weaponsMesh[nextWeapon].SetActive(true);
-
-            UpdateWeaponData();
-        }
         #endregion
     }
+
 }
