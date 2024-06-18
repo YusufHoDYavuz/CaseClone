@@ -232,10 +232,5 @@ namespace XGames.GameName
             }
             Debug.Log($"Player is dead.");
         }
-
-        public void GateTransitionEffect()
-        {
-
-        }
     }
 }

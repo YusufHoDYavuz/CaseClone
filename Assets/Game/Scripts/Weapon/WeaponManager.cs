@@ -20,11 +20,17 @@ namespace XGames.GameName
         private Coroutine fireCoroutine;
 
         private Character character;
+        private bool test;
 
         private void OnEnable()
         {
             EventBus<UpdateWeaponEvent>.AddListener(UpdateWeapon);
             EventBus<GameStartEvent>.AddListener(SetAndStartFire);
+
+            if (character != null)
+            {
+                StartFire();
+            }
         }
 
         private void OnDisable()
@@ -38,16 +44,10 @@ namespace XGames.GameName
             character = GetComponentInParent<Character>();
         }
 
-        private void Start()
-        {
-            SetWeaponsMesh();
-        }
-
         private void SetAndStartFire(object sender,GameStartEvent e)
         {
             if (character != null && !character.GetIsDeath())
             {
-                UpdateWeaponData();
                 StartFire();
             }
         }
@@ -102,6 +102,9 @@ namespace XGames.GameName
 
         private void StartFire()
         {
+            SetWeaponsMesh();
+            UpdateWeaponData();
+
             if (fireCoroutine != null)
             {
                 StopCoroutine(fireCoroutine);
