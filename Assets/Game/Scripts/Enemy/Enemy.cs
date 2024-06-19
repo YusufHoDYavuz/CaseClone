@@ -47,12 +47,12 @@ namespace XGames.GameName
 
         private void OnEnable()
         {
-            EventBus<GetCharacterEvent>.AddListener(SetAgentValue);
+            EventBus<GetCharacterEvent>.AddListener(SetCharacterValue);
         }
 
         private void OnDisable()
         {
-            EventBus<GetCharacterEvent>.RemoveListener(SetAgentValue);
+            EventBus<GetCharacterEvent>.RemoveListener(SetCharacterValue);
         }
 
         private void Awake()
@@ -69,7 +69,7 @@ namespace XGames.GameName
             healthBarCanvas.SetActive(false);
         }
 
-        private void SetAgentValue(object sender, GetCharacterEvent e)
+        private void SetCharacterValue(object sender, GetCharacterEvent e)
         {
             target = e.character;
         }
@@ -77,6 +77,7 @@ namespace XGames.GameName
         private void Update()
         {
             //Chase - Attack
+
             float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
             if (distanceToTarget < agent.stoppingDistance)

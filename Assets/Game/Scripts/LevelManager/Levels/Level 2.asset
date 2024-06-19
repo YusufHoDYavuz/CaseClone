@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95d4383d152354b4da5da453dc16e90a, type: 3}
-  m_Name: Level 1
+  m_Name: Level 2
   m_EditorClassIdentifier: 
   prefabs:
+  - {fileID: 1509920665622627826, guid: 7e5325dd64faf2841a7336da9f564fcc, type: 3}
   - {fileID: 5657000790925864728, guid: 9798c9f99d82ef84a98990f13d316e8b, type: 3}
   - {fileID: 5480878380976260088, guid: 2b166c3bec4a34646a574b74768075e6, type: 3}
-  - {fileID: 1509920665622627826, guid: 7e5325dd64faf2841a7336da9f564fcc, type: 3}
-  objectDistance: 25
+  objectDistance: 10

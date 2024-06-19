@@ -28,7 +28,7 @@ namespace XGames.GameName.Managers
 
         private void Start()
         {
-            EventBus<GamePrepareEvent>.Emit(this, new GamePrepareEvent());
+            EventBus<GamePrepareEvent>.Emit(this, new GamePrepareEvent(DataHolder.Instance.LevelIndex));
         }
 
         private void GamePrepare(object sender, GamePrepareEvent e)
@@ -44,7 +44,7 @@ namespace XGames.GameName.Managers
         private void GameNextLevel(object sender, GameNextLevelEvent e)
         {
             GameStateManager.Instance.SetGameState(GameStateManager.GameState.NextLevel);
-            EventBus<GamePrepareEvent>.Emit(this, new GamePrepareEvent());
+            EventBus<GamePrepareEvent>.Emit(this, new GamePrepareEvent(DataHolder.Instance.LevelIndex));
         }
 
         private void GameRestartLevel(object sender, GameRestartLevelEvent e)
@@ -80,6 +80,7 @@ namespace XGames.GameName.Managers
         public void CallNextLevelEvent()
         {
             //FIRST FOR NEXT LEVEL CODES
+            DataHolder.Instance.LevelIndex++;
             EventBus<GameNextLevelEvent>.Emit(this, new GameNextLevelEvent());
         }
     }

@@ -7,6 +7,7 @@ namespace XGames.GameName
         public static DataHolder Instance { get; private set; }
 
         private int activeWeaponID;
+        private int levelIndex;
 
         private void Awake()
         {
@@ -20,6 +21,16 @@ namespace XGames.GameName
         {
             get { return activeWeaponID; }
             set { activeWeaponID = value; }
+        }
+
+        public int LevelIndex
+        {
+            get { return levelIndex; }
+            set 
+            { 
+                levelIndex = value;
+                Debug.Log($"Current Level Index: {levelIndex}");
+            }
         }
     }
 }
