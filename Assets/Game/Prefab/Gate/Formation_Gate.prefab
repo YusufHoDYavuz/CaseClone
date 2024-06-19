@@ -9,10 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7965239176565503874}
-  - component: {fileID: 1219947866112093650}
   - component: {fileID: 8986440948122382941}
   - component: {fileID: 2859624995292045898}
-  - component: {fileID: 8903213317089984968}
   m_Layer: 0
   m_Name: Formation_Gate
   m_TagString: Untagged
@@ -39,33 +37,6 @@ Transform:
   - {fileID: 8051956989345803160}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1219947866112093650
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138533298942670226}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &8986440948122382941
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -102,19 +73,6 @@ MonoBehaviour:
   isIncrease: 1
   multiplierText: {fileID: 40329648177700603}
   multiplierAmounts: 01000000020000000300000004000000
---- !u!114 &8903213317089984968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138533298942670226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24627fd63e62382489ed1cc52208bec7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
 --- !u!1 &2783344151473824130
 GameObject:
   m_ObjectHideFlags: 0
