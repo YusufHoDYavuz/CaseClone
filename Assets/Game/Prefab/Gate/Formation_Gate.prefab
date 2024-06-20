@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isIncrease: 1
+  increaseLimit: 10
   multiplierText: {fileID: 40329648177700603}
   multiplierAmounts: 01000000020000000300000004000000
 --- !u!1 &2783344151473824130

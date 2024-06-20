@@ -168,6 +168,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Target
       objectReference: {fileID: 0}
+    - target: {fileID: 2817104362201669782, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
+      propertyPath: m_Speed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8305079990614540813, guid: 7b877b47ce0127142a5b2c813092cdf9, type: 3}
       propertyPath: animator
       value: 

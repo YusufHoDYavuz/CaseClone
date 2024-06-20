@@ -28,9 +28,7 @@ namespace XGames.GameName
         {
             if (other.CompareTag("Target"))
             {
-                Vector3 partilcePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z * 0.9f);
-                Instantiate(hitParticle, partilcePosition, Quaternion.identity);
-                gameObject.SetActive(false);
+                SetActiveBullet();
 
                 IDamageable damageable = other.GetComponent<IDamageable>();
 
@@ -39,6 +37,13 @@ namespace XGames.GameName
                     damageable.Damage(damageAmount);
                 }
             }
+        }
+
+        private void SetActiveBullet()
+        {
+            Vector3 partilcePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z * 0.9f);
+            Instantiate(hitParticle, partilcePosition, Quaternion.identity);
+            gameObject.SetActive(false);
         }
     }
 }

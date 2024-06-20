@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XGames.GameName.Events.States;
 using XGames.GameName.EventSystem;
+using XGames.GameName.Managers;
 
 namespace XGames.GameName
 {
@@ -117,7 +118,7 @@ namespace XGames.GameName
 
         private IEnumerator FireLoop()
         {
-            while (character != null && !character.GetIsDeath())
+            while (character != null && !character.GetIsDeath() && GameStateManager.Instance.GetGameState() == GameStateManager.GameState.Start)
             {
                 yield return new WaitForSeconds(fireRate);
                 Fire();

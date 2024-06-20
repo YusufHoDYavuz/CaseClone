@@ -267,6 +267,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7572435591349126898, guid: 87e70235b3ab9a84aa021fa04d002c96, type: 3}
+      propertyPath: hitAmountMax
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572435591349126898, guid: 87e70235b3ab9a84aa021fa04d002c96, type: 3}
+      propertyPath: hitAmountMin
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572435591349126898, guid: 87e70235b3ab9a84aa021fa04d002c96, type: 3}
       propertyPath: explosionParticle
       value: 
       objectReference: {fileID: 8791802859087666345, guid: ae07f2a45f14a82428409cfe410e6002, type: 3}

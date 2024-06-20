@@ -231,5 +231,13 @@ namespace XGames.GameName
         {
             EventBus<GetCharacterEvent>.Emit(this, new GetCharacterEvent(this.gameObject));
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Finish"))
+            {
+                EventBus<GameEndEvent>.Emit(this, new GameEndEvent());
+            }
+        }
     }
 }

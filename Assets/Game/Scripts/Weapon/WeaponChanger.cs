@@ -13,8 +13,10 @@ namespace XGames.GameName
         private int weaponID;
 
         [Header("Health")]
-        [SerializeField] private float hitAmount;
+        [SerializeField] private int hitAmountMin;
+        [SerializeField] private int hitAmountMax;
         [SerializeField] private TextMeshPro hitText;
+        private int hitAmount;
 
         [Header("Animator")]
         [SerializeField] private Animator animator;
@@ -39,6 +41,9 @@ namespace XGames.GameName
             int weaponID = GetRandomWeaponID();
             this.weaponID = weaponID;
             //Debug.Log($"Weapon ID: {weaponID}");
+
+            int randomHitAmount = GetRandomHitAmount();
+            hitAmount = randomHitAmount;
 
             hitText.text = hitAmount.ToString();
         }
@@ -88,6 +93,12 @@ namespace XGames.GameName
         private void SetStartActions(object sender,GameStartEvent e)
         {
             animator.SetTrigger("Roll");
+        }
+
+        private int GetRandomHitAmount()
+        {
+            int randomValue = Random.Range(hitAmountMin, hitAmountMax);
+            return randomValue;
         }
     }
 }

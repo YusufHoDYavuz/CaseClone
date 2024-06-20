@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a33c88968779b2c4095c92d101f62b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.08
+  radius: 1.1
   angle: 65.9
   enemyPrefabs:
   - {fileID: 1904568306357626750, guid: 45574bd8718d5b1469f7780606f6929f, type: 3}
   - {fileID: 8356211398627034457, guid: 607a86ef3172aec49bd41068d9784785, type: 3}
   minEnemyCount: 5
-  maxEnemyCount: 15
+  maxEnemyCount: 10

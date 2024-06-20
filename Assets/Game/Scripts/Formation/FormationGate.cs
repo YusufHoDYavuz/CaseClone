@@ -9,6 +9,7 @@ namespace XGames.GameName
     {
         [Header("Multiplier")]
         [SerializeField] private bool isIncrease;
+        [SerializeField] private int increaseLimit;
         [SerializeField] private TextMeshPro multiplierText;
         [SerializeField] private List<int> multiplierAmounts;
         private int multiplierValue;
@@ -41,7 +42,9 @@ namespace XGames.GameName
             }
             else if (other.GetComponent<Bullet>() != null)
             {
-                multiplierValue++;
+                if (multiplierValue < increaseLimit)
+                    multiplierValue++;
+
                 UpdateMultiplierText();
                 animator.SetTrigger("Hit");
             }
