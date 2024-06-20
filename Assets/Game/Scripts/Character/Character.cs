@@ -29,11 +29,13 @@ namespace XGames.GameName
         private void OnEnable()
         {
             EventBus<UpdateCharacterFormation>.AddListener(UpdateFormationCount);
+            EventBus<GameNextLevelEvent>.AddListener(ResetCharacterCount);
         }
 
         private void OnDisable()
         {
             EventBus<UpdateCharacterFormation>.RemoveListener(UpdateFormationCount);
+            EventBus<GameNextLevelEvent>.RemoveListener(ResetCharacterCount);
         }
 
         private void Start()
@@ -230,6 +232,12 @@ namespace XGames.GameName
         private void SetCharacterForEnemy()
         {
             EventBus<GetCharacterEvent>.Emit(this, new GetCharacterEvent(this.gameObject));
+        }
+
+        private void ResetCharacterCount(object sender, GameNextLevelEvent e)
+        {
+            SetCharacterCount();
+            transform.position = new Vector3(0, transform.position.y, transform.position.z);
         }
 
         private void OnTriggerEnter(Collider other)

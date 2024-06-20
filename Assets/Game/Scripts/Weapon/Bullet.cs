@@ -1,4 +1,6 @@
 using UnityEngine;
+using XGames.GameName.Events.States;
+using XGames.GameName.EventSystem;
 
 namespace XGames.GameName
 {
@@ -13,6 +15,16 @@ namespace XGames.GameName
         [SerializeField] private GameObject hitParticle;
 
         private new Rigidbody rigidbody;
+
+        private void OnEnable()
+        {
+            EventBus<GamePrepareEvent>.AddListener(SetDeactiveBullet);
+        }
+
+        private void OnDisable()
+        {
+            EventBus<GamePrepareEvent>.RemoveListener(SetDeactiveBullet);
+        }
 
         private void Awake()
         {
@@ -43,6 +55,11 @@ namespace XGames.GameName
         {
             Vector3 partilcePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z * 0.9f);
             Instantiate(hitParticle, partilcePosition, Quaternion.identity);
+            gameObject.SetActive(false);
+        }
+
+        private void SetDeactiveBullet(object sender, GamePrepareEvent e)
+        {
             gameObject.SetActive(false);
         }
     }
