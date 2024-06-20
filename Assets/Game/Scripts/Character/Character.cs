@@ -43,7 +43,7 @@ namespace XGames.GameName
 
         private void Start()
         {
-            EventBus<GetCharacterEvent>.Emit(this, new GetCharacterEvent(this.gameObject));
+            Invoke(nameof(SetCharacterForEnemy), 0.25f);
             SetCharacterCount();
 
             base.health = initialHealth;
@@ -231,6 +231,11 @@ namespace XGames.GameName
                 }
             }
             Debug.Log($"Player is dead.");
+        }
+
+        private void SetCharacterForEnemy()
+        {
+            EventBus<GetCharacterEvent>.Emit(this, new GetCharacterEvent(this.gameObject));
         }
     }
 }

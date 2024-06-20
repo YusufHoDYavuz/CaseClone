@@ -38,7 +38,7 @@ namespace XGames.GameName
 
             for (int j = 0; j < levels[e.levelIndex].prefabs.Count; j++)
             {
-                GameObject levelObject = Instantiate(levels[e.levelIndex].prefabs[j], transform.position, Quaternion.identity, levelParentObject);
+                GameObject levelObject = Instantiate(levels[e.levelIndex].prefabs[j], levels[e.levelIndex].prefabs[j].transform.position, Quaternion.identity, levelParentObject);
                 levelObject.transform.localPosition = new Vector3(levelObject.transform.position.x, levelObject.transform.position.y, startPosition);
                 startPosition += levels[e.levelIndex].objectDistance;
 

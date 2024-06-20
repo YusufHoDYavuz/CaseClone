@@ -78,6 +78,8 @@ namespace XGames.GameName
         {
             //Chase - Attack
 
+            if (target == null) return;
+
             float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
             if (distanceToTarget < agent.stoppingDistance)
