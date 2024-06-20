@@ -30,12 +30,14 @@ namespace XGames.GameName
         {
             EventBus<UpdateCharacterFormation>.AddListener(UpdateFormationCount);
             EventBus<GameNextLevelEvent>.AddListener(ResetCharacterCount);
+            EventBus<GamePrepareEvent>.AddListener(SetCharacterOtherLevel);
         }
 
         private void OnDisable()
         {
             EventBus<UpdateCharacterFormation>.RemoveListener(UpdateFormationCount);
             EventBus<GameNextLevelEvent>.RemoveListener(ResetCharacterCount);
+            EventBus<GamePrepareEvent>.RemoveListener(SetCharacterOtherLevel);
         }
 
         private void Start()
@@ -232,6 +234,11 @@ namespace XGames.GameName
         private void SetCharacterForEnemy()
         {
             EventBus<GetCharacterEvent>.Emit(this, new GetCharacterEvent(this.gameObject));
+        }
+
+        private void SetCharacterOtherLevel(object sender, GamePrepareEvent e)
+        {
+            Invoke(nameof(SetCharacterForEnemy), 0.25f);
         }
 
         private void ResetCharacterCount(object sender, GameNextLevelEvent e)
